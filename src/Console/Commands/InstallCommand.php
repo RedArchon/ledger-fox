@@ -1,19 +1,30 @@
 <?php
 
-namespace SilentOrchid\LedgerFox\Commands;
+declare(strict_types=1);
+
+namespace SilentOrchid\LedgerFox\Console\Commands;
 
 use Illuminate\Console\Command;
 
 class InstallCommand extends Command
 {
+    /**
+     * The command signature.
+     */
     protected $signature = 'ledger-fox:install
                             {--force : Overwrite existing published files}
                             {--rules-only : Publish Cursor rules only}
                             {--agents-only : Publish AGENTS.md only}
                             {--config-only : Publish config only}';
 
+    /**
+     * The command description.
+     */
     protected $description = 'Publish Ledger Fox Cursor rules and agent configuration into the application';
 
+    /**
+     * Execute the console command.
+     */
     public function handle(): int
     {
         $force = (bool) $this->option('force');

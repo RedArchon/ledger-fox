@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use SilentOrchid\LedgerFox\Tests\TestCase;
 
-pest()->extend(TestCase::class)->in('Feature');
+uses(TestCase::class)->in(__DIR__);

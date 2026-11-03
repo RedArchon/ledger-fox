@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+use SilentOrchid\LedgerFox\LedgerFox;
+
 afterEach(function () {
     $paths = [
         base_path('.cursor/rules/core.mdc'),
@@ -15,14 +19,29 @@ afterEach(function () {
     }
 
     $rulesDir = base_path('.cursor/rules');
+
     if (is_dir($rulesDir)) {
         @rmdir($rulesDir);
     }
 
     $cursorDir = base_path('.cursor');
+
     if (is_dir($cursorDir)) {
         @rmdir($cursorDir);
     }
+});
+
+it('resolves the singleton', function () {
+    expect(app(LedgerFox::class))->toBeInstanceOf(LedgerFox::class);
+});
+
+it('returns the same instance from the container', function () {
+    expect(app(LedgerFox::class))->toBe(app(LedgerFox::class));
+});
+
+it('merges the package config', function () {
+    expect(config('ledger-fox.publish_rules'))->toBeTrue()
+        ->and(config('ledger-fox.publish_agents'))->toBeTrue();
 });
 
 it('registers the install command', function () {
@@ -31,7 +50,7 @@ it('registers the install command', function () {
         ->assertSuccessful();
 });
 
-it('publishes rules, agents, and config', function () {
+it('publishes rules, agents, and config via install', function () {
     $this->artisan('ledger-fox:install')
         ->assertSuccessful();
 
@@ -48,4 +67,13 @@ it('publishes rules only when requested', function () {
     expect(file_exists(base_path('.cursor/rules/core.mdc')))->toBeTrue()
         ->and(file_exists(config_path('ledger-fox.php')))->toBeFalse()
         ->and(file_exists(base_path('AGENTS.md')))->toBeFalse();
+});
+
+it('publishes all resources via the ledger-fox tag', function () {
+    $this->artisan('vendor:publish', ['--tag' => 'ledger-fox'])
+        ->assertSuccessful();
+
+    expect(file_exists(base_path('.cursor/rules/core.mdc')))->toBeTrue()
+        ->and(file_exists(base_path('AGENTS.md')))->toBeTrue()
+        ->and(file_exists(config_path('ledger-fox.php')))->toBeTrue();
 });
