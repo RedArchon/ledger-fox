@@ -1,0 +1,14 @@
+---
+description: Core agent guidance placeholder shipped by Ledger Fox
+alwaysApply: true
+---
+
+# Core
+
+Placeholder rule. Replace this content with project-specific agent guidance.
+
+## Defaults
+
+- Prefer clear, minimal changes
+- Follow existing application conventions
+- Ask before expanding scope

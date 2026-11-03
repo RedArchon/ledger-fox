@@ -1,0 +1,10 @@
+---
+description: Testing guidance placeholder shipped by Ledger Fox
+alwaysApply: false
+globs:
+  - tests/**/*
+---
+
+# Testing
+
+Placeholder rule for test conventions. Replace with your project's testing standards.

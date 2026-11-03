@@ -1,0 +1,56 @@
+{
+    "name": "silent-orchid/ledger-fox",
+    "description": "Publish Cursor agent rules and configuration into a Laravel application.",
+    "keywords": [
+        "laravel",
+        "cursor",
+        "agent",
+        "rules"
+    ],
+    "homepage": "https://github.com/RedArchon/ledger-fox",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Silent Orchid",
+            "homepage": "https://github.com/RedArchon"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/console": "^11.0|^12.0",
+        "illuminate/support": "^11.0|^12.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0|^10.0",
+        "pestphp/pest": "^3.0",
+        "pestphp/pest-plugin-laravel": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SilentOrchid\\LedgerFox\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SilentOrchid\\LedgerFox\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SilentOrchid\\LedgerFox\\LedgerFoxServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "pest"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
